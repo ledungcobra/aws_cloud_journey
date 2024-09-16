@@ -1,6 +1,5 @@
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
-baseurl = "https://ledungcobra.github.io"
 relativeURLs = true
 uglyURLs = true
 # For search functionality
