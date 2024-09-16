@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Thiết lập Tài Khoản AWS on Tạo mới tài khoản AWS</title>
-    <link>http://localhost:1313/vi/</link>
+    <link>//localhost:1313/vi/</link>
     <description>Recent content in Thiết lập Tài Khoản AWS on Tạo mới tài khoản AWS</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="http://localhost:1313/vi/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/vi/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
