@@ -59,25 +59,25 @@ U2F Security Key là một giao thức chứng thực mở cho phép người d�
 }
 ```
 
-![MFA](images/3/0001.png?featherlight=false&width=90pc)
+![MFA](/images/3/0001.png?featherlight=false&width=90pc)
 
 4. Chọn **Next: Tags**. Đây là màn hình về **Tags** một công cụ dùng để phân biệt các tài nguyên của AWS.
 5. Chọn  **Next: Review**. Đây là màn hình cho phép bạn review về bộ quyền mà bạn đang tạo ra. 
 6. Nhập tên bộ quyền (ví dụ: MFAHardDevice) và chọn **Create policy**.
 
-![MFA](images/3/0002.png?featherlight=false&width=90pc)
+![MFA](/images/3/0002.png?featherlight=false&width=90pc)
 
-![MFA](images/3/0003.png?featherlight=false&width=90pc)
+![MFA](/images/3/0003.png?featherlight=false&width=90pc)
 
 7. Ở thanh bên trái , chọn **Dashboard** và sau đó chọn **Enable MFA**.
 
-![MFA](images/3/0004.png?featherlight=false&width=90pc)
+![MFA](/images/3/0004.png?featherlight=false&width=90pc)
 
 8. Mở rộng Multi-factor authentication (MFA) sau đó chọn **Active MFA**.
 
 9. Trong **Manage MFA Device**, chọn **U2F security key** sau đó nhấn **Continue**.
 10. Cắm khóa bảo mật U2F vào cổng USB của máy tính.
 
-![Image](images/1-account-setup/U2FSK.png?featherlight=false&width=90pc)
+![Image](/images/1-account-setup/U2FSK.png?featherlight=false&width=90pc)
 
 11. Nhấn vào khóa bảo mật U2F, và sau đó chọn **Close** khi U2F thiết lập thành công.

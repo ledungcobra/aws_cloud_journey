@@ -28,7 +28,7 @@ After checking that the information is correct but still has not received the ve
 
 1. Go to the [AWS Support console](https://aws.amazon.com/support/), select **Create case**.
 
-![AWS Support](images/4/0001.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0001.png?featherlight=false&width=90pc)
 
 2. Select **Account and billing support** and enter the support information:
    - Type: select **Account**.
@@ -37,22 +37,22 @@ After checking that the information is correct but still has not received the ve
    - Description: Provide details of the situation encountered and information about the time you need support to activate the account.
    - Attachments: Attach an image describing the authentication step you are facing.
 
-![AWS Support](images/4/0002.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0002.png?featherlight=false&width=90pc)
 
-![AWS Support](images/4/0003.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0003.png?featherlight=false&width=90pc)
 
-![AWS Support](images/4/0004.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0004.png?featherlight=false&width=90pc)
 
 3. Under **Contact options**, select **Chat** under **Contact methods**.
 
-![AWS Support](images/4/0005.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0005.png?featherlight=false&width=90pc)
 
 4. Select **Submit**.
 
-![AWS Support](images/4/0006.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0006.png?featherlight=false&width=90pc)
 5. The AWS Support team will contact and assist in activating your account.
 
-![AWS Support](images/4/0007.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0007.png?featherlight=false&width=90pc)
 {{% notice note %}}
 You can create a support request with AWS Support even if your account is not activated.
 {{% /notice %}}

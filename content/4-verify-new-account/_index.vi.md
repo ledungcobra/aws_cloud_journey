@@ -28,7 +28,7 @@ Sau khi kiểm tra thông tin chính xác nhưng vẫn chưa nhận được cu�
 
 1. Truy cập vào [AWS Support console](https://aws.amazon.com/support/), chọn **Create case**.
 
-![AWS Support](images/4/0001.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0001.png?featherlight=false&width=90pc)
 
 2. Chọn **Account and billing support** và nhập các thông tin hỗ trợ:
    - Type: chọn **Account**.
@@ -37,22 +37,22 @@ Sau khi kiểm tra thông tin chính xác nhưng vẫn chưa nhận được cu�
    - Description: Cung cấp chi tiết tình trạng gặp phải và thông tin về thời gian bạn cần hỗ trợ kích hoạt tài khoản.
    - Attachments: Đính kèm hình ảnh mô tả bước xác thực đang vướng phải.
 
-![AWS Support](images/4/0002.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0002.png?featherlight=false&width=90pc)
 
-![AWS Support](images/4/0003.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0003.png?featherlight=false&width=90pc)
 
-![AWS Support](images/4/0004.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0004.png?featherlight=false&width=90pc)
 
 3. Ở mục **Contact options**, chọn **Chat** ở **Contact methods**.
 
-![AWS Support](images/4/0005.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0005.png?featherlight=false&width=90pc)
 
 4. Chọn **Submit**.
 
-![AWS Support](images/4/0006.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0006.png?featherlight=false&width=90pc)
 5. Đội ngũ AWS Support sẽ liên lạc và hỗ trợ kích hoạt tài khoản của bạn.
 
-![AWS Support](images/4/0007.png?featherlight=false&width=90pc)
+![AWS Support](/images/4/0007.png?featherlight=false&width=90pc)
 {{% notice note %}}
 Bạn có thể tạo yêu cầu hỗ trợ với AWS Support ngay cả khi tài khoản của bạn chưa được kích hoạt.
 {{% /notice %}}

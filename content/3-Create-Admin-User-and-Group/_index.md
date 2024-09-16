@@ -11,27 +11,27 @@ pre : " <b> 3. </b> "
 
 2. Click on your account name at the top right corner and select **My Security Credentials**.
 
-   ![AWS IAM](images/01/0001.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0001.png?featherlight=false&width=90pc)
 
    > **Note:** If you don't see the **My Security Credentials** menu, you can click on the search icon and type **IAM**. Then click on the IAM service to access the IAM management interface.
 
-   ![AWS IAM](images/01/0002.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0002.png?featherlight=false&width=90pc)
 
 3. On the left sidebar, choose **User Groups**, and then select **Create Group**.
 
-   ![AWS IAM](images/01/0003.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0003.png?featherlight=false&width=90pc)
 
 4. Under the **Name the group** section, enter the Group name (For example: *AdminGroup*), and scroll down.
 
-   ![AWS IAM](images/01/0004.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0004.png?featherlight=false&width=90pc)
 
 5. In the **Attach permissions policies** section, type **AdministratorAccess** in the search bar and select it. Finally, click on **Create Group**.
 
-   ![AWS IAM](images/01/0005.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0005.png?featherlight=false&width=90pc)
 
 6. The creation of the admin group is complete.
 
-   ![AWS IAM](images/01/0006.png?featherlight=false&width=90pc)
+   ![AWS IAM](/images/01/0006.png?featherlight=false&width=90pc)
 
 
 #### Create Admin User
@@ -104,12 +104,12 @@ If the user also requires access keys, refer to [Managing access keys for IAM us
 2. Click on the name of the IAM User you just selected.
 3. In the **Summary** section, select the **Security credentials** tab. Look at the line **Summary: Console sign-in link** and copy the link next to it. This is the link you use to log in to the IAM User.
 
-![AWS IAM](images/03/0001.png?featherlight=false&width=90pc)
+![AWS IAM](/images/03/0001.png?featherlight=false&width=90pc)
 
 
 4. Open an incognito tab of the browser you are using and paste the link into the search bar.
 
-![AWS IAM](images/03/0002.png?featherlight=false&width=90pc)
+![AWS IAM](/images/03/0002.png?featherlight=false&width=90pc)
 
 {{% notice info %}}
 Incognito tab login allows you to log in to AWS with an IAM User without having to log out of the root user in the main tab.
@@ -117,12 +117,12 @@ Incognito tab login allows you to log in to AWS with an IAM User without having 
 
 5. Enter the correct IAM User name and password that you entered in the **create IAM User** section above. Click **sign in**.
 
-![AWS IAM](images/03/0003.png?featherlight=false&width=90pc)
+![AWS IAM](/images/03/0003.png?featherlight=false&width=90pc)
 
 6. Congratulations, you have successfully accessed your account as an IAM User **AdminUser**.
 
 
-![AWS IAM](images/03/0004.png?featherlight=false&width=90pc)
+![AWS IAM](/images/03/0004.png?featherlight=false&width=90pc)
 
 
 7. In The next step, we will switch to using IAM Role to improve the security of your account.
