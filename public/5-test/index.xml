@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>5-Test on Create a new AWS account.</title>
-    <link>http://localhost:1313/aws_cloud_journey/5-test/</link>
+    <link>http://localhost:1313/5-test/</link>
     <description>Recent content in 5-Test on Create a new AWS account.</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/aws_cloud_journey/5-test/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/5-test/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
