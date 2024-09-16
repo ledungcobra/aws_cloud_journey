@@ -21,51 +21,51 @@ pre : " <b> 1. </b> "
 2. Select **Create an AWS Account** in the upper right corner.
     - ***Note:** If you don't see **Create an AWS Account**, select **Sign In to the Console** then select **Create a new AWS Account**.*
 
-![Create Account](/images/1/0001.png?featherlight=false&width=90pc)
+![Create Account](images/1/0001.png?featherlight=false&width=90pc)
 
 3. Enter email information and **AWS account name**
 
-![Create Account](/images/1/0002.png?featherlight=false&width=90pc)
+![Create Account](images/1/0002.png?featherlight=false&width=90pc)
 
 
 4. Complete information.
 
-![Create Account](/images/1/0003.png?featherlight=false&width=90pc)
+![Create Account](images/1/0003.png?featherlight=false&width=90pc)
 
 5. Confirm the code sent from the email.
 
-![Create Account](/images/1/0004.png?featherlight=false&width=90pc)
+![Create Account](images/1/0004.png?featherlight=false&width=90pc)
 
-![Create Account](/images/1/0005.png?featherlight=false&width=90pc)
+![Create Account](images/1/0005.png?featherlight=false&width=90pc)
 
-![Create Account](/images/1/0006.png?featherlight=false&width=90pc)
+![Create Account](images/1/0006.png?featherlight=false&width=90pc)
 
 6. After successful email authentication. You complete the account information.
 
-![Create Account](/images/1/0007.png?featherlight=false&width=90pc)
+![Create Account](images/1/0007.png?featherlight=false&width=90pc)
 
 
-![Create Account](/images/1/0008.png?featherlight=false&width=90pc)
+![Create Account](images/1/0008.png?featherlight=false&width=90pc)
 
 7. Complete the account registration documents.
 
 - You can choose **Personal** or **Business** account
 
-![Create Account](/images/1/0009.png?featherlight=false&width=90pc)
+![Create Account](images/1/0009.png?featherlight=false&width=90pc)
 
 #### Add payment method
 
 - Enter your credit card information and select **Verify and Add**.
     - ***Note**: You can choose a different address for your account by selecting **Use a new address** before **Verify and Add**.*
 
-![Create Account](/images/1/00010.png?featherlight=false&width=90pc)
+![Create Account](images/1/00010.png?featherlight=false&width=90pc)
 #### Verify your phone number
 
 1. Enter the phone number.
 2. Enter the security check code then select **Call me now**.
 3. AWS will contact and verify account opening.
 
-![Create Account](/images/1/00011.png?featherlight=false&width=90pc)
+![Create Account](images/1/00011.png?featherlight=false&width=90pc)
 
 #### Select Support Plan
 
