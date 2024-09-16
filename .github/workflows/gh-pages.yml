@@ -3,7 +3,7 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
