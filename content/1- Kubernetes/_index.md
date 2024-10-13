@@ -144,9 +144,7 @@ COPY server.js .
 CMD ["node", "server.js"]
 ```
 
-TODO INSERT Source code
-
-The source code can be download [here](https://github.com/luksa/kubia).
+The source code can be download [here](files/simple-nodejs.zip).
 
 - Build a container image:
 
@@ -160,4 +158,26 @@ You should replace `ledungcobra` with your Docker Hub username. This can help yo
 docker tag ledungcobra/simple-node:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/simple-node:latest
 ```
 
-![alt text](./images/build-container-image.png)
+![Build Container Image](./images/build-container-image.png)
+
+- To run the container image:
+
+```shell
+docker run -p 9000:8080 ledungcobra/simple-node
+```
+
+- `-p 9000:8080`: means that the container will be exposed on port 8080 and mapped to port 9000 on the host machine.
+
+![Run Container Image](images/run-container-image.png)
+
+- To push image to Docker Hub:
+
+```shell
+docker push ledungcobra/simple-node
+```
+
+{{%notice tip%}}
+Replace `ledungcobra` with your Docker Hub username.
+{{%/notice%}}
+
+![Push docker image](images/_index.png)

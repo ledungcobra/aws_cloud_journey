@@ -8,7 +8,7 @@ pre: " <b> 1. </b> "
 
 #### Install Docker Desktop
 
-First yo can follow this video to install docker desktop in your own machine
+First you can follow this video to install docker desktop in your own machine
 [Install Docker Desktop Tutorial](https://www.youtube.com/watch?v=5RQbdMn04Oc)
 
 #### Install Minikube
