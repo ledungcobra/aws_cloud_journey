@@ -1,12 +1,13 @@
 ---
-title : "Create new AWS account"
-date : "`r Sys.Date()`"
-weight : 1
-chapter : false
-pre : " <b> 1. </b> "
+title: "Sample"
+date: "`r Sys.Date()`"
+weight: 1
+chapter: false
+pre: " <b> 1. </b> "
 ---
 
 **Content:**
+
 - [Create an AWS account](#create-an-aws-account)
 - [Add payment method](#add-payment-method)
 - [Verify your phone number](#verify-your-phone-number)
@@ -19,14 +20,13 @@ pre : " <b> 1. </b> "
 
 1. Go to the [Amazon Web Service homepage](https://aws.amazon.com/) page.
 2. Select **Create an AWS Account** in the upper right corner.
-    - ***Note:** If you don't see **Create an AWS Account**, select **Sign In to the Console** then select **Create a new AWS Account**.*
+   - **\*Note:** If you don't see **Create an AWS Account**, select **Sign In to the Console** then select **Create a new AWS Account**.\*
 
 ![Create Account](/images/1/0001.png?featherlight=false&width=90pc)
 
 3. Enter email information and **AWS account name**
 
 ![Create Account](/images/1/0002.png?featherlight=false&width=90pc)
-
 
 4. Complete information.
 
@@ -44,7 +44,6 @@ pre : " <b> 1. </b> "
 
 ![Create Account](/images/1/0007.png?featherlight=false&width=90pc)
 
-
 ![Create Account](/images/1/0008.png?featherlight=false&width=90pc)
 
 7. Complete the account registration documents.
@@ -56,9 +55,10 @@ pre : " <b> 1. </b> "
 #### Add payment method
 
 - Enter your credit card information and select **Verify and Add**.
-    - ***Note**: You can choose a different address for your account by selecting **Use a new address** before **Verify and Add**.*
+  - **\*Note**: You can choose a different address for your account by selecting **Use a new address** before **Verify and Add**.\*
 
 ![Create Account](/images/1/00010.png?featherlight=false&width=90pc)
+
 #### Verify your phone number
 
 1. Enter the phone number.
@@ -69,13 +69,13 @@ pre : " <b> 1. </b> "
 
 #### Select Support Plan
 
-- In the **Select a support plan** page, select an effective plan, to compare plans, see [Compare AWS Support Plans](https://aws.amazon.com/premiumsupport/plans/ ).
+- In the **Select a support plan** page, select an effective plan, to compare plans, see [Compare AWS Support Plans](https://aws.amazon.com/premiumsupport/plans/).
 
 #### Wait for your account to be activated
 
 - After selecting **Support plan**, the account is usually activated after a few minutes, but the process can take up to 24 hours. You will still be able to log in to your AWS account at this time, the AWS Home page may show a “Complete Sign Up” button during this time, even if you have completed all the steps in the registration section.
-- After receiving an email confirming your account has been activated, you can access all AWS services.       
-  
+- After receiving an email confirming your account has been activated, you can access all AWS services.
+
 #### Important
 
 The following AWS Identity and Access Management (IAM) actions will reach the end of standard support on July 2023: `aws-portal:ModifyAccount` and `aws-portal:ViewAccount`. See the [Using fine-grained AWS Billing actions](link_to_documentation) to replace these actions with fine-grained actions so you have access to AWS Billing, AWS Cost Management, and AWS accounts consoles.
