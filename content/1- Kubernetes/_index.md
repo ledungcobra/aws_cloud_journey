@@ -12,15 +12,6 @@ pre: " <b> 1. </b> "
 - [Container technology](#container-technology)
 - [The architecture of Kubernetes](#the-architecture-of-kubernetes)
 - [Running application in Kubernetes](#running-application-in-kubernetes)
-- [Microservices vs. Monolithic Applications](#microservices-vs.-monolithic-applications)
-- [The Shift to Continuous Delivery](#the-shift-to-continuous-delivery)
-- [Containers and the Need for Isolation](#containers-and-the-need-for-isolation)
-- [Docker as a Container Platform](#docker-as-a-container-platform)
-- [Alternatives to Docker](#alternatives-to-docker)
-- [Kubernetes as an Operating System for the Cluster](#kubernetes-as-an-operating-system-for-the-cluster)
-- [Scaling and Resource Utilization](#scaling-and-resource-utilization)
-- [Self-Healing and Resilience](#self-healing-and-resilience)
-- [Developer and Operations Collaboration](#developer-and-operations-collaboration)
 
 #### The need for a system like Kubernetes
 
@@ -87,22 +78,86 @@ In summary, Kubernetes leverages container technology to provide a robust platfo
   - **Controller Manager**: Enforces cluster policies and manages various aspects of the cluster state.
   - **etcd**: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.
 
+The Control Plan hold and control the state of the cluster but they don't run you applications. This is done by the worker nodes.
+
+##### **The Worker Nodes**
+
+- The worker nodes are machines that run containerized applications.
+
+**Components**:
+
+- Docker, rkt or another container runtime which is responsible for running the containers.
+- Kubelet: An agent that communicates with API Server and manage containers on its node.
+- Kube-proxy: which load balances network traffic between between application components
+
 #### Running application in Kubernetes
 
-#### Microservices vs. Monolithic Applications
+- To be able run application in Kubernetes, you need to package it into one or more container images then push it into image registry the post a description of your application to Kubernetes API server.
 
-#### The Shift to Continuous Delivery
+- After you submit the application description, the scheduler will schedule a group of containers (called pod) to run on the worker node on the available worker nodes based on compute and resource requirements. The Kubelet on those nodes then instructs the Container Runtime (Docker) to pull the container image from the registry and run it.
 
-#### Containers and the Need for Isolation
+![K8s Pod Scheduling](./images/k8s-container-scheduling.png)
 
-#### Docker as a Container Platform
+- Once the application is running, the Kubernetes API server will keep track of the running containers and their state. If you specify that you want to run 3 instances of your application, the Kubernetes will make sure that there are always 3 instances running. If one of the instances fails, the Kubernetes will restart it and make sure it is running again. Similarly, if the underlying machine running the container fails, the Kubernetes will reschedule the container to a healthy machine.
 
-#### Alternatives to Docker
+- While application is running, you can decide you want to increase or decrease the number of copies and Kubernetes will automatically spin sup additional ones or stop the extra ones, respectively. You can leave the jobs of deciding when to scale up or down to Kubernetes based on realtime metrics such as CPU and memory usage, queries per second or any other metric you app exposes.
 
-#### Kubernetes as an Operating System for the Cluster
+- Pod are ephemeral, which means that if a pod goes down, Kubernetes will automatically restart it in another machine. To allow clients easily find the container that provide specific service, Kubernetes expose all of them at a single static IP address and expose that address to all application running in the cluster. But client can also use the DNS name of the service to find the IP address of the pod providing the service. The kube-proxy will make sure connection to the service are load balanced across all the containers that provide the service. The IP address of the service stays constant, so client can always connect to its containers, even when they're moved around the container.
 
-#### Scaling and Resource Utilization
+**Benefits of using Kubernetes**:
 
-#### Self-Healing and Resilience
+- The OPS team doesn't need to deploy your application anymore.
+- Because the containered application already contains all it needs to run, the system administrator doesn't need to install anything to deploy and run the app.
+- On any node where Kubernetes is deployed, Kubernetes can run the app immediately without the help from sysadmins.
+- Since Kubernetes exposes all its worker node as single deployment platform, application can be deploy on their own and don't need to know anything about the servers that make up the cluster.
+- Without using K8s the sysadmin need to select one specific node that has an SSD and deploy the application there. But when using K8s, instead of selecting a specific node where your application should be run, it is more appropriate to tell K8s choosing node with SSD.
+- Automatic scaling and self-healing capabilities. It means that the K8s will constantly monitor the running application and will restart it in another machine if it fails. If the K8s is running on cloud infrastructure, where adding additional nodes is easy and cheap, K8s can automatically add more instances of your application to handle increased load.
 
-#### Developer and Operations Collaboration
+#### Running your first application in Kubernetes
+
+![Docker Flow](./images/docker-flow.png)
+
+The above diagram shows how a docker container is running on a single machine.
+
+The following is the content of the `server.js` file that will be used as the application for this example:
+
+```js
+const http = require("http");
+const os = require("os");
+console.log("Kubia server starting...");
+var handler = function (request, response) {
+  console.log("Received request from " + request.connection.remoteAddress);
+  response.writeHead(200);
+  response.end("You've hit " + os.hostname() + "\n");
+};
+var www = http.createServer(handler);
+www.listen(8080);
+```
+
+- The server logs the IP address of the client that made the request and send back the hostname of the machine it is running on.
+
+`Dockerfile` to build the container image:
+
+```dockerfile
+FROM node:18
+COPY server.js .
+CMD ["node", "server.js"]
+```
+
+TODO INSERT Source code
+
+The source code can be download [here](https://github.com/luksa/kubia).
+
+- Build a container image:
+
+```shell
+docker build -t ledungcobra/simple-node .
+```
+
+You should replace `ledungcobra` with your Docker Hub username. This can help you to push image to your own repository on Docker Hub. If you need to push the docker image to ECR repository you should tag it with the ECR repository URL like this:
+
+```shell
+docker tag ledungcobra/simple-node:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/simple-node:latest
+```
+
+![alt text](./images/build-container-image.png)
