@@ -22,8 +22,46 @@ Then follow this step to install minikube in your own machine depend on your ope
 #### Verify minikube installation
 
 ```shell
-minikube start
+minikube start --driver=docker
+
 ```
+
+For windows to config for local image
+
+```shell
+& minikube -p minikube docker-env --shell powershell | Invoke-Expression
+```
+
+For linux, macos
+
+```shell
+eval $(minikube -p minikube docker-env)
+
+```
+
+[Refer to this link for more information](https://www.baeldung.com/ops/docker-local-images-minikube)
+
+This command will switch your local docker registry to the minikube cluster docker registry.
+
+**To revert back**
+
+```shell
+# Revert back for windows
+& minikube -p minikube docker-env --unset --shell powershell | Invoke-Expression
+
+# Revert back for linux, macos
+eval $(minikube -p minikube docker-env --unset)
+```
+
+At this point, you must restart your terminals and your IDEs.
+
+You can verify the docker images in minikube by running this command
+
+```shell
+minikube image ls --format table
+```
+
+![List docker images in minikube](images/_index-1.png)
 
 ```shell
 minikube status

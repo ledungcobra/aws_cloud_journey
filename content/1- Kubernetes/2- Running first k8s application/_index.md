@@ -1,14 +1,17 @@
 ---
 title: "Running your first application in Kubernetes"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 2
 chapter: false
-pre: " <b> 1. </b> "
+pre: " <b> 2. </b> "
 ---
 
 **Content:**
 
-- [Create Kubernetes Cluster on Google Cloud](#create-kubernetes-cluster-on-google-cloud)
+- [Create and run the first k8s application](#create-and-run-the-first-k8s-application)
+- [Visualize k8s cluster](#visualize-k8s-cluster)
+
+#### Create and run the first k8s application
 
 If you would like to create Kubernetes Cluster on Google Cloud, you can follow these steps:
 
@@ -22,10 +25,6 @@ gcloud container clusters create kubia --num-nodes 3 --machine-type f1-micro
 ![Interact with Kubernetes Cluster](./images/interact-with-kubernetes-cluster.png)
 
 In this demo I use Minikube to create a local Kubernetes cluster.
-
-```shell
-minikube start
-```
 
 - This command will create a single-node Kubernetes cluster on your local machine.
 
@@ -149,3 +148,87 @@ spec:
       port: 8080 # The port that the service will expose
       targetPort: 8080 # The port that the application is listening on
 ```
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: simple-node-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simple-node
+  template:
+    metadata:
+      labels:
+        app: simple-node
+    spec:
+      containers:
+        - name: simple-node
+          image: ledungcobra/simple-node
+          ports:
+            - containerPort: 8080
+          # Readiness probe is used to determine if the application is ready to serve requests
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5 # Wait for 5 seconds before performing the first probe
+            periodSeconds: 5 # Check the readiness of the application every 5 seconds
+```
+
+```shell
+kubectl apply -f replicaset.yaml
+```
+
+![Runing apply to create replicaset](images/_index.png)
+
+```shell
+kubectl get rs
+```
+
+![List out replicaset](images/_index-7.png)
+
+- In the image above, the `DESIRED` number of replicas is 3 is the number of replicas that we want to have, `CURRENT` the number of replicas that we currently have, `READY` the number of replicas that are ready to serve requests (this can be done via readiness probe in k8s manifest).
+
+To scale in (remove pods) we can use command
+
+```shell
+kubectl scale rs simple-node-replicaset --replicas=2
+```
+
+![Scale replicasets](images/_index-8.png)
+
+This command will remove one pod from the replicaset so that we only have 2 pods in the replicaset.
+
+![Scale in](images/_index-9.png)
+
+#### Visualize K8s cluster
+
+- If you are using Google Cloud, you can use the following command to visualize the cluster:
+
+```shell
+kubectl cluster-info | grep dashboard
+```
+
+To find the username and password for the dashboard, you can use the following command:
+
+```shell
+gcloud container clusters describe CLUSTER_NAME | grep -E "(username|password):"
+```
+
+{{%notice tip%}}
+You need to replace `CLUSTER_NAME` with yours GKE cluster name.
+{{%/notice%}}
+
+- If you are using Minikube, you can use the following command to visualize the cluster:
+
+```shell
+minikube addons enable metrics-server # Need to run this command first to enable metrics-server addon
+minikube dashboard
+```
+
+![K8S Dashboard](images/_index-10.png)
+
+- The minikube does not required any credentials to login.

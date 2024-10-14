@@ -7,7 +7,6 @@ pre: " <b> 1. </b> "
 ---
 
 **Content:**
-
 - [The need for a system like Kubernetes](#the-need-for-a-system-like-kubernetes)
 - [Container technology](#container-technology)
 - [The architecture of Kubernetes](#the-architecture-of-kubernetes)
