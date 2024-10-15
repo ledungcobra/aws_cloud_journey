@@ -22,7 +22,6 @@ pre: " <b> 3. </b> "
 
 - [Namespaces to virtualy separate cluster for different teams](#namespaces-to-virtualy-separate-cluster-for-different-teams)
 
-- [Kubectl explain](#kubectl-explain)
 
 #### Decide wheather containers should be grouped together in a pod or not
 
@@ -151,12 +150,262 @@ kubectl port-forward <pod-name> 8080:8080
 ![Port forwarding](images/_index-4.png)
 
 #### Labels and selectors
+
 - When the number of pods in your cluster grow, it will be useful to classify and organize them using labels.
-- Label are simple, but incredible powerful, Kubernetes feature 
+- Label are simple, but incredible powerful, Kubernetes feature. A label is a key-value pair that is attached to an object. A resource can have multiple labels. You can create label when create resource from manifest or you can add or modify label of existing resource using `kubectl label` command.
+
+- Suppose we have 3 environment: stable, beta, canary. We want to label the pod to indicate which environment it belongs to.
+- Also, we want to label pod to indicate its functionality: ui, account service, product catalog, shopping cart, ...
+- By doing so we can organize our pods horizontally and vertically.
+
+![Horizontal labeling pod](images/_index-5.png)
+
+- This command is useful to see the label of the pod.
+
+```shell
+kubectl get pods --show-labels
+```
+
+![Show label of pod](images/_index-6.png)
+
+- To list some labels, you can specify them with -L option.
+
+```shell
+kubectl get pods -L <label-key1>,<label-key2>
+```
+
+![Filter pod by label](images/_index-7.png)
+
+- To filter pods by label, you can use the following command:
+
+```shell
+kubectl get pods -l <label-key>=<label-value>
+```
+
+![Filter pod by label](images/_index-8.png)
+
+- To add label to a pod, you can use the following command:
+
+```shell
+kubectl label pod <pod-name> <label-key>=<label-value>
+```
+
+![Add label to pod](images/_index-9.png)
+
+- To remove label from a pod, you can use the following command:
+
+```shell
+kubectl label pod <pod-name> <label-key>-
+```
+
+![Remove label from pod](images/_index-10.png)
+
+- To overwrite a label, you can use the following command:
+
+```shell
+kubectl label pod <pod-name> <label-key>=<label-value> --overwrite
+```
+
+![Overwrite label](images/_index-11.png)
+
+- To list all resource having a specific label, you can use the following command:
+
+```shell
+kubectl get all -l <label-key>
+```
+
+![List all resource having a specific label](images/_index-12.png)
+
+- To list all resource not having a specific label, you can use the following command:
+
+```shell
+kubectl get all -l 'expression'
+```
+
+- The expression is a string that follows the format of a label selector.
+
+```code
+- Expression can be one of the followings:
+  - '!<label-key>'
+  - '<label-key>!=<label-value>'
+  - '<label-key> in (<label-value1>,<label-value2>,...)'
+  - '<label-key> notin (<label-value1>,<label-value2>,...)'
+```
+
+![List all resource not having a specific label](images/_index-13.png)
+
+**Using labels and selectors to constrain pod scheduling**
+
+- The pods by default scheduled randomly across the nodes in the cluster. But in some case, you want to control which pod runs on which node maybe you have many different types of nodes (some having SSD installed, some have GPU, ....). You should not specific tell what node a pod should schedule on, since it will cause pod couple to a specific node. But if you want to do so you can delegate this job to Kubernetes to schedule your to by selecting the node that matches those requirements. This can be done through node label and node label selector.
+
+**Label nodes**
+
+- To label nodes, you can use the following command:
+
+```shell
+kubectl label node <node-name> <label-key>=<label-value>
+```
+
+![Labeling nodes](images/_index-14.png)
+
+- The same pattern like labeling pod, you can label nodes with multiple labels.
+
+- The formular for all resource that support label selector:
+
+```shell
+kubectl label <resource> <label-key>=<label-value>
+kubectl get <resource> -l <label-key>=<label-value>
+kubectl get <resource> -l 'expression'
+kubectl label <resource> <label-key>- # Remove label from resource
+```
+
+- The expression is a string that follows the format of a label selector.
+
+```code
+- Expression can be one of the followings:
+  - '!<label-key>'
+  - '<label-key>!=<label-value>'
+  - '<label-key> in (<label-value1>,<label-value2>,...)'
+  - '<label-key> notin (<label-value1>,<label-value2>,...)'
+```
+
 #### Schedule pods on specific nodes
+
+- To schedule a pod on a specific node, you can use the following command:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+spec:
+  nodeSelector:
+    gpu: "true" # This will schedule to the node that has the label
+  containers:
+    - image: luksa/kubia
+      name: kubia
+```
+
+- If the `nodeSelector` have more than one label, the pod will be scheduled to the node that has all the labels.
+
+- If we don't have any node that match all the labels, the pod will be pending.
+  ![Fail scheduling](images/_index-15.png)
+
+- Checking statuc of pods
+
+```shell
+k describe pods/ipc-pod
+```
+
+![Warning scheduling pods](images/_index-16.png)
+
+- The image show that there is no node in the cluster that match the `env=dev` label so that the pod is pending forever.
 
 #### Annotations
 
+- In addtion to labels, pods and other objects can also contain annotations. Annotations are similar to labels, but they hold identifying information rather than descriptive information. They can't be used to group objects like the way labels can. The objects can selected through label selectors, On the other hand, annotation can hold much larger
+
+```shell
+kubectl get po kubia-zxzij -o yaml
+```
+
+```yaml
+apiVersion: v1
+kind: pod
+metadata:
+  annotations:
+    kubernetes.io/created-by: |
+      {"kind":"SerializedReference", "apiVersion":"v1",
+       "reference":{"kind":"ReplicationController", "namespace":"default", ...
+```
+
+The annotation `kubernetes.io/created-by` is large, it holds JSON data can hold large blobs of data up to 256KB in total.
+
+- To add annotation to a pod, you can use the following command:
+
+```shell
+kubectl annotate pod <pod-name> <annotation-key>=<annotation-value>
+```
+
+```shell
+kubectl annotate pod ipc-pod annotation=test
+```
+
+![alt text](images/_index-17.png)
+
 #### Namespaces to virtualy separate cluster for different teams
 
-#### Kubectl explain
+- Allows you to organize your cluster into virtual clusters. This means that you can redeclare same resource name without conflict between multiple namespaces.
+
+{{% notice info %}}
+The node is not namespaced
+{{%/notice%}}
+
+**Useful commands**
+
+```shell
+kubectl get ns # List all namespaces
+kubectl create ns <namespace-name> # Create a new namespace
+kubectl delete ns <namespace-name> # Delete a namespace
+kubectl config view --minify --output 'jsonpath={..namespace}' # Show current namespace I'm in
+kubectl config set-context <context-name> --namespace=<namespace-name> # Set the namespace for the current context
+kubectl get <resource> -n <namespace-name> # Get pods in a specific namespace
+```
+
+- Manifest to create namespace
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+```
+
+- To create object that tight to a specific namespace
+
+```shell
+kubectl create -f <manifest-filename.yaml> -n <namespace>
+```
+
+**Contexts**
+
+If using namespace you always need to specify namespace, to avoid this you can set the namespace as default namespace. But we can use Context to switch between namespace without specify namespace every time.
+
+Create new context
+
+```shell
+kubectl config set-context <context-name> --namespace=<namespace-name>
+
+```
+
+List all contexts
+
+```shell
+kubectl config get-contexts
+```
+
+Switch context
+
+```shell
+kubectl config use-context <context-name>
+```
+
+Delete context
+
+```shell
+kubectl config delete-context <context-name>
+```
+
+**Understand the isolation provided by namespaces**
+
+- The namespaces offer virtual isolation. But the resource in other namespace is still able to connect to other pod in other namespace if it has IP address.
+
+{{% notice warning %}}
+**Be careful when delete namespace**: When you delete a namespace, all the resources in that namespace will be deleted.
+{{%/notice%}}
+
+- If you want to delete all resource but want to keep namespace for future use, you can use the following command:
+
+```shell
+kubectl delete all --all -n <namespace-name>
+```
