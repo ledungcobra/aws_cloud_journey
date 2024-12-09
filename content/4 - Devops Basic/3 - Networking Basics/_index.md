@@ -9,14 +9,14 @@ pre: " <b> 3. </b> "
 ## Switching
 * This creates a network for systems to connect with each other.
 
-![Switch](image-1.png)
+![Switch](./images/image-1.png)
 
 ### Setup network computer 1
 * Get network interface 
 ```shell
 ip link
 ```
-![Check network interface name](image.png)
+![Check network interface name](./images/image.png)
 * Add address to VIF
 ```shell
 ip addr add 192.168.1.10/24 dev eth0
@@ -27,7 +27,7 @@ ip addr add 192.168.1.10/24 dev eth0
 ```shell
 ip link
 ```
-![Check network interface name](image-2.png)
+![Check network interface name](./images/image-2.png)
 * Add address to VIF
 ```shell
 ip addr add 192.168.1.11/24 dev eth0
@@ -41,7 +41,7 @@ ping 192.168.1.11
 ## Routing
 * To allow computers in different networks to communicate with each other we can use `Router`
 
-![Router](image-3.png)
+![Router](./images/image-3.png)
 
 * To checking the list of routes available in the computer run the below command
 ```shell
@@ -61,7 +61,7 @@ ip route add default via 192.168.2.1
 
 
 ### Setup a linux host as Router
-![Image 1](image-4.png)
+![Image 1](./images/image-4.png)
 * We have the computer B sit between computer A and C, we need to make computer A and computer C can talk to each other.
 * From the computer A it can configure to send traffic to CIDR block `192.168.2.0/24` through Gateway `192.168.1.6`
 ```shell
@@ -110,7 +110,7 @@ of DNS record.
 nameserver DNS_SERVER_IP
 ```
 * If you have duplicated DNS name in `/etc/hosts` and DNS server the order is determined by the file `/etc/nsswitch.conf`
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 * Files stand for the  `/etc/hosts`, dns stands for DNS server.
 

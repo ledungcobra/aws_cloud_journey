@@ -1,18 +1,18 @@
-![Installed python packages](image.png)
+![Installed python packages](./images/image.png)
 
 Troubleshooting installing library 
 
-![Trouble shooting](image-1.png)
+![Trouble shooting](./images/image-1.png)
 
 * Install dependencies from `requirements.txt` file
 ```bash
 pip install -r requirements.txt
 ```
 
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 
 ## Different type of servers
- ![Servers](image-3.png)
+ ![Servers](./images/image-3.png)
 
 
  ## Apache Webserver
@@ -43,20 +43,20 @@ cat /var/log/httpd/error_log
 
 * The configuration file located in `/etc/httpd/conf/httpd.conf`
 
-![Apache config](image-4.png)
+![Apache config](./images/image-4.png)
 
 * To access the page navigate to `http://localhost:80`
 
 * To enable on server to serve for multiple website we can configure VirtualHost
-![Virtual Host](image-5.png)
+![Virtual Host](./images/image-5.png)
 
 To test it we can configure DNS on our local system at `etc/hosts`
 
 
-![DNS](image-6.png)
+![DNS](./images/image-6.png)
 
 * Instead of having a large configuration we can have separate configuration files in the location `etc/httpd/conf/`
-![Configurations](image-7.png)
+![Configurations](./images/image-7.png)
 
 * When we have multiple configuration we need to have `Include` statement to include these files
 

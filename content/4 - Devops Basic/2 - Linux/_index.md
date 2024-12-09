@@ -108,20 +108,20 @@ yum install ansible
 yum repolist
 ```
 
-![Yum repo list](image.png)
+![Yum repo list](./images/image.png)
 
 * List all configuration of repo 
 ```shell
 ls /etc/yum.repos.d/
 ```
 
-![List all repos configs](image-1.png)
+![List all repos configs](./images/image-1.png)
 
 ```shell
 cat /etc/yum.repos.d/CentOS-Base.repo
 ```
 
-![Inside one config file](image-2.png)
+![Inside one config file](./images/image-2.png)
 
 * To list all packages installed in your computer
 ```shell
@@ -130,7 +130,7 @@ yum list forticlient
 * You can replace `forticlient` with whatever packages you want to search. Or omit the `forticlient` to search for all packages.
 
 
-![alt text](image-3.png)
+![alt text](./images/image-3.png)
 
 
 * Uninstall packages use the command 
@@ -142,7 +142,7 @@ yum remove forticlient
 ```shell
 yum --showduplicates list ansible
 ```
-![List duplicates](image-4.png)
+![List duplicates](./images/image-4.png)
 
 * To install specific version of ansible use the command.
 ```shell
@@ -186,7 +186,7 @@ systemctl disable httpd
 * Configure program as service
 * Suppose you have simple python command to run python application `/usr/bin/python3 /opt/code/my_app.py`
 
-![Run python application](image-5.png)
+![Run python application](./images/image-5.png)
 
 * The goal now is to create a service my_app so that we can run the service by using `systemctl` command.
 
