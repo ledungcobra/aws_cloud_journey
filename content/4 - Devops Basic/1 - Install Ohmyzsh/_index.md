@@ -8,7 +8,7 @@ pre: " <b> 1. </b> "
 
 ## Install Oh my zsh
 
-- I will install oh my zsh in Centos 9 Linux here are command to install it
+- I will install oh my zsh in Centos 9 Linux here are commands to install it
 
 - Install zsh
 ```shell
