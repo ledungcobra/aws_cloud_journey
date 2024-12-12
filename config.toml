@@ -15,7 +15,8 @@ home = [ "HTML", "RSS", "JSON"]
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
-  
+  custom_css = ["css/theme-custom.css"]
+
 [Languages]
 [Languages.en]
 title = "Create a new AWS account."
