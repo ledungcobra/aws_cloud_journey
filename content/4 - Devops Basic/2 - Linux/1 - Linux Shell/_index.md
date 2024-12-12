@@ -1,9 +1,12 @@
 ---
 title: "Linux Shell"
+slug: "linux-shell"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
+description: "Learn about Linux shell commands and operations"  # This will be used for og:description
+image: "images/_index.png"  # This will be used for og:image
 ---
 
 # Introduction to the Linux Shell
