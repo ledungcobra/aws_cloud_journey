@@ -1,6 +1,6 @@
 ---
-title: "Linux Shell"
-slug: "linux-shell"
+title: "Linux Shell Part 1"
+slug: "linux-shell-1"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
