@@ -9,6 +9,24 @@ description: "Learn about Linux shell commands and operations"  # This will be u
 image: "images/_index.png"  # This will be used for og:image
 ---
 
+- [Introduction to the Linux Shell](#introduction-to-the-linux-shell)
+- [Command in Linux](#command-in-linux)
+  - [Internal or built-in commands](#internal-or-built-in-commands)
+  - [External commands](#external-commands)
+- [Basic Linux commands](#basic-linux-commands)
+  - [Directory Navigation](#directory-navigation)
+  - [Directory Management](#directory-management)
+  - [Moving and Renaming](#moving-and-renaming)
+  - [Copying](#copying)
+  - [Deleting](#deleting)
+  - [Read file content](#read-file-content)
+- [Getting help](#getting-help)
+  - [Ask about function of command](#ask-about-function-of-command)
+  - [Getting full manual of command](#getting-full-manual-of-command)
+  - [Getting help of command](#getting-help-of-command)
+  - [Searching for command](#searching-for-command)
+
+
 # Introduction to the Linux Shell
 
 - This is a way to interact with the linux system, the shell provide more power than the graphical interface can. 
