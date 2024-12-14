@@ -7,6 +7,12 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
+- [Introduction](#introduction)
+- [Types of package managers](#types-of-package-managers)
+- [Working with RPM](#working-with-rpm)
+- [Working with Debian based package manager](#working-with-debian-based-package-manager)
+
+
 ## Introduction
 - In this article, we will focus on two types of package manager:
   - RPM-based: Red Hat Package Manager

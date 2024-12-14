@@ -7,6 +7,15 @@ chapter: false
 pre: " <b> 4. </b> "
 ---
 
+- [File compression and archiving](#file-compression-and-archiving)
+  - [Compressing](#compressing)
+  - [Decompressing](#decompressing)
+- [Searching Files and Directories](#searching-files-and-directories)
+- [Filter text](#filter-text)
+- [I/O Redirection](#io-redirection)
+- [Command line pipes](#command-line-pipes)
+
+
 ## File compression and archiving
 - To view size of file use command: `du -sh <file_name>` or we can use `ls -lh <file_name>` to view the size of file.
 ![Show file size](images/_index.png)
