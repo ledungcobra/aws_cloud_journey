@@ -1,10 +1,64 @@
 ---
-title: "Networking Basics"
+title: "Networking"
 date: "`r Sys.Date()`"
-weight: 3
+weight: 7
 chapter: false
-pre: " <b> 3. </b> "
+pre: " <b> 7. </b> "
 ---
+
+- [DNS](#dns)
+  - [Search for domain](#search-for-domain)
+  - [Tool to test DNS](#tool-to-test-dns)
+- [Switching](#switching)
+  - [Setup network computer 1](#setup-network-computer-1)
+  - [Setup network computer 2](#setup-network-computer-2)
+- [Routing](#routing)
+  - [Setup a linux host as Router](#setup-a-linux-host-as-router)
+  - [Note](#note)
+
+
+## DNS
+* Allow you to connect to other host by using DNS name instead of IP address.
+* Instead of each time we have new server we need to add ip address to `/etc/hosts` file all we need to do is to host a `DNS server` that maintains a list
+of DNS record.
+* The client need to configure `/etc/resolv.conf`
+```
+nameserver DNS_SERVER_IP
+```
+* If you have duplicated DNS name in `/etc/hosts` and DNS server the order is determined by the file `/etc/nsswitch.conf`
+![alt text](./images/image-5.png)
+
+* Files stand for the  `/etc/hosts`, dns stands for DNS server.
+
+### Search for domain
+* /etc/resolv.conf
+```
+nameserver 1.1.1.1
+search mycompany.com
+```
+### Tool to test DNS
+* `nslookup`
+Example result should look like this:
+```
+Server:         1.1.1.1
+Address:        1.1.1.1#53
+
+Non-authoritative answer:
+Name:   mycompany.com
+Address: 192.168.1.1
+```
+* `dig`
+Example result should look like this:
+```
+; <<>> DiG 9.11.3-P4-RedHat-9.11.3-26.P4.el8_8.1 <<>> mycompany.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 1000
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; ANSWER SECTION:
+mycompany.com. 0 IN A 192.168.1.1
+```
 
 ## Switching
 * This creates a network for systems to connect with each other.
@@ -96,30 +150,4 @@ ip link # show interfaces
 ip addr # show addresses of interfaces
 ip addr add 192.168.1.10/24 dev eth0 # Set ip for network inteface
 ```
-
 Note that the changes are not persist after reboot.
-
-TODO
-
-## DNS
-* Allow you to connect to other host by using DNS name instead of IP address.
-* Instead of each time we have new server we need to add ip address to `/etc/hosts` file all we need to do is to host a `DNS server` that maintains a list
-of DNS record.
-* The client need to configure `/etc/resolv.conf`
-```
-nameserver DNS_SERVER_IP
-```
-* If you have duplicated DNS name in `/etc/hosts` and DNS server the order is determined by the file `/etc/nsswitch.conf`
-![alt text](./images/image-5.png)
-
-* Files stand for the  `/etc/hosts`, dns stands for DNS server.
-
-### Search for domain
-* /etc/resolv.conf
-```
-nameserver 1.1.1.1
-search mycompany.com
-```
-### Tool to test DNS
-* nslookup
-* dig
