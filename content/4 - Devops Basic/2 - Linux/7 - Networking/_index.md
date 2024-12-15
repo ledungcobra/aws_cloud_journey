@@ -8,6 +8,7 @@ pre: " <b> 7. </b> "
 
 - [DNS](#dns)
   - [Search for domain](#search-for-domain)
+  - [Record Types](#record-types)
   - [Tool to test DNS](#tool-to-test-dns)
 - [Switching](#switching)
   - [Setup network computer 1](#setup-network-computer-1)
@@ -26,39 +27,37 @@ of DNS record.
 nameserver DNS_SERVER_IP
 ```
 * If you have duplicated DNS name in `/etc/hosts` and DNS server the order is determined by the file `/etc/nsswitch.conf`
-![alt text](./images/image-5.png)
+![NSSwitch File](./images/image-5.png)
 
-* Files stand for the  `/etc/hosts`, dns stands for DNS server.
+* `files` stand for the  `/etc/hosts`, `dns` stands for DNS server.
+* You can add nameserver hosted by google `8.8.8.8` to the file `/etc/resolv.conf` so that you can ping to many well known websites.
 
 ### Search for domain
 * /etc/resolv.conf
 ```
+nameserver 192.168.1.1
 nameserver 1.1.1.1
 search mycompany.com
 ```
+* The `search` directive allows you to search for domain in the current directory.
+
+### Record Types
+- A: store alias for mapping IP address to domain name.
+- AAAA: store alias for mapping IPv6 address to domain name.
+- CNAME: store alias for mapping domain name to another domain name. Example: `www.google.com` is alias for `google.com`.
+
+
+
+
+
 ### Tool to test DNS
 * `nslookup`
 Example result should look like this:
-```
-Server:         1.1.1.1
-Address:        1.1.1.1#53
+![NSLookup result](images/_index.png)
 
-Non-authoritative answer:
-Name:   mycompany.com
-Address: 192.168.1.1
-```
 * `dig`
 Example result should look like this:
-```
-; <<>> DiG 9.11.3-P4-RedHat-9.11.3-26.P4.el8_8.1 <<>> mycompany.com
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 1000
-;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
-
-;; ANSWER SECTION:
-mycompany.com. 0 IN A 192.168.1.1
-```
+![Dig result](images/_index-1.png)
 
 ## Switching
 * This creates a network for systems to connect with each other.
@@ -151,3 +150,14 @@ ip addr # show addresses of interfaces
 ip addr add 192.168.1.10/24 dev eth0 # Set ip for network inteface
 ```
 Note that the changes are not persist after reboot.
+- To make it persist after reboot we need to add the changes to `/etc/network/interfaces` file.
+
+```
+/etc/network/interfaces
+...
+auto eth0
+iface eth0 inet static
+    address 192.168.1.10
+    netmask 255.255.255.0
+...
+```
