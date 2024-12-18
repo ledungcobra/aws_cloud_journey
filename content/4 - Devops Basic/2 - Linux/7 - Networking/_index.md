@@ -111,6 +111,10 @@ ip route add 192.168.2.0/24 via 192.168.1.1
 ```shell
 ip route add default via 192.168.2.1
 ```
+- To delete default route run the below command
+```shell
+sudo ip r del default
+```
 
 
 ### Setup a linux host as Router
@@ -160,4 +164,10 @@ iface eth0 inet static
     address 192.168.1.10
     netmask 255.255.255.0
 ...
+```
+- In some case the network interface is down, to check the status of the network interface run the below command
+![Network Interface Is Down](images/_index-2.png)
+- To bring the network interface up run the below command
+```shell
+sudo ip link set dev eth0 up
 ```
