@@ -8,6 +8,12 @@ pre: " <b> 8. </b> "
 
 - [Access Control](#access-control)
 - [Managing Users](#managing-users)
+- [File Permission](#file-permission)
+- [SSH and SCP](#ssh-and-scp)
+  - [SSH](#ssh)
+  - [SCP](#scp)
+- [Network Security](#network-security)
+- [Cron Jobs](#cron-jobs)
 
 
 ## Access Control
@@ -93,3 +99,146 @@ NAME:PASSWORD:GID:MEMBERS
 - `sudo groupdel GROUP_NAME`: to delete the group.
 - `sudo groupmod -g GID GROUP_NAME`: to modify the group.
 - `sudo usermod -aG GROUP_NAME USER_NAME`: to add the user to the group.
+
+## File Permission
+- The `ls -l` command is used to list the file permission, file type, owner, group, size, date and time, and file name.
+![File Permission](images/_index-8.png)
+
+| File Type        | Abbreviation |
+| ---------------- | ------------ |
+| Directory        | d            |
+| Regular File     | -            |
+| Character Device | c            |
+| Link             | l            |
+| Socket File      | s            |
+| Pipe             | p            |
+| Block Device     | b            |
+|                  |              |
+
+{{%notice tip%}}
+The Pipe is used to communicate between processes, it acts as a temporary storage for data.
+{{%/notice%}}
+![File Permission](images/_index-9.png)
+- File permission is formed in 3 parts:
+- `Owner`: the owner of the file.
+- `Group`: the group of the file.
+- `Others`: the others of the file
+Example: `-rw-r--r--`
+- `-`: the file type.
+- `rw-`: the owner permission.
+- `r--`: the group permission.
+- `r--`: the others permission.
+
+- The table below shows the permission of the file or directory.
+| Bit | Purpose       | Octal Value |
+| --- | ------------- | ----------- |
+| r   | Read          | 4           |
+| w   | Write         | 2           |
+| x   | Execute       | 1           |
+| -   | No Permission | 0           |
+
+- The `x` bit is used to determine if the file is executable. If the file is a directory, the `x` bit is used to determine if the directory is searchable
+- The order of permission is check sequentially from left to right when it found the first permission that is not allowed, it will stop and return the permission, for example if you own a file with permission `-rw-r--r--` your final permission will be `-rw-` desipe the fact that you belong to the group.
+- To change permission of file or directory, we can use `chmod` command with the number of permission calculated by sum triplet of read, write, execute permission for each owner, group, others.
+- Example: `chmod 777 file.txt` will change the permission of `file.txt` to `rwxrwxrwx`, `chmod 755 file.txt` will change the permission of `file.txt` to `rwxr-xr-x`.
+![Permission Group](images/_index-10.png)
+- Alternatively, we can use `chmod` command with the symbol of permission.
+- `chmod u+x file.txt`: to add execute permission to the owner.
+- `chmod g-w file.txt`: to remove write permission to the group.
+- `chmod o=r file.txt`: to set read permission to the others.
+- `chmod a=rwx file.txt`: to set read, write, execute permission to the owner, group, others.
+- `chmod u+x,g+w,o-r file.txt`: to add execute permission to the owner, add write permission to the group, remove read permission to the others.
+- `chown USER_NAME:GROUP_NAME file.txt`: to change the owner and group of the file.
+- `chown -r USER_NAME:GROUP_NAME directory/`: to change the owner and group of the directory and its content.
+- `chown USER_NAME file.txt`: to change the owner of the file.
+- `chgrp GROUP_NAME file.txt`: to change only the group of the file.
+
+## SSH and SCP
+### SSH
+- SSH is used for login and execute command in remote system
+- Command for it is
+```shell
+ssh user@hostname
+```
+- The remote server should have ssh service running on port 22 by default
+- Then it requires you to enter the password to access the remote server. But you can use public key authentication to access the remote server. First you need to generate key pair on your local machine.
+**What is key pair?**
+- Key pair is a pair of keys, public key and private key.
+- Public key is used to encrypt the data, private key is used to decrypt the data.
+- Public key is stored in the remote server, private key is stored in the local machine.
+- When you use public key authentication, the remote server will use your public key to encrypt the data, and your local machine will use your private key to decrypt the data and vice versa.
+- To generate key pair, you can use `ssh-keygen` command.
+
+- `ssh-keygen -t rsa`: to generate key pair.
+![Generate Key Pair](images/_index-11.png)
+- As the image above shows the public key is stored at `/home/bob/.ssh/id_rsa.pub` and private key is stored at `/home/bob/.ssh/id_rsa`.
+- `ssh-copy-id user@hostname`: to copy the public key to the remote server. Requre password to copy the public key to the remote server.
+![Copy Public Key](images/_index-12.png)
+- Now we can use `ssh user@hostname` to access the remote server without password.
+- The public key is stored in the remote server at `/home/bob/.ssh/authorized_keys` file in remote server.
+![Authorized Keys](images/_index-13.png)
+
+### SCP
+- Allow copy data through SSH protocol.
+![Demonstrate copying process](images/_index-14.png)
+- `scp FILE_NAME USER_NAME@HOSTNAME:PATH`: to copy the file to the remote server.
+- `scp USER_NAME@HOSTNAME:PATH FILE_NAME`: to copy the file from the remote server.
+- `scp -r DIRECTORY_NAME USER_NAME@HOSTNAME:PATH`: to copy the directory to the remote server.
+- `scp -r USER_NAME@HOSTNAME:PATH DIRECTORY_NAME`: to copy the directory from the remote server.
+
+## Network Security
+- This will restrict network access to Linux system.
+- In readhat or centos, the IpTables installed by default. But in Ubuntu you need to install it manually by running `sudo apt install iptables`.
+- View IP Tables `sudo iptables -L`: to view the IP Tables.
+![alt text](images/_index-15.png)
+**INPUT CHAIN**
+- The Input Chain is used to handle the incoming traffic. If we don't set any rule by default, all traffics will be accepted.
+- Forward Chain is used to handle the traffic that is forwarded to another network interface. The Chain means the list of rules that will be check sequentially.
+- Command sample to add `INPUT` chain rule: `sudo iptables -A INPUT -s SOURCE_IP -j ACCEPT -p PROTCOL_NAME --dport PORT_NUMBER`
+| Option    | Description                               |
+| --------- | ----------------------------------------- |
+| `-A`      | Add a new rule                            |
+| `-p`      | Protocol name                             |
+| `-s`      | Source IP address                         |
+| `-d`      | Destination IP address                    |
+| `--dport` | Destination port                          |
+| `-j`      | Action: ACCEPT, DROP, REJECT, LOG, RETURN |
+- But we need to add default rule to restrict other client trying to connect the specify port, since we don't have rule for default case yet, and the connection will go through the default chain (Accept all traffic).
+- `sudo iptables -A INPUT -p PROTOCOL --dport DESTINATION_PORT -j DROP`: this command will add a new rule to drop the traffic that is not specified in the rule.
+- The IP Tables result will be like this:
+![alt text](images/_index-16.png)
+- The order of the rule is important, the first rule that match will be executed.
+**OUTPUT CHAIN**
+- The Output Chain is used to handle the outgoing traffic. If we don't set any rule by default, all traffics will be accepted.
+- _Supporse we have requirement like this for configure outgoing connections what will we do in this case ? :_
+![Requirements](images/_index-17.png)
+
+```shell
+iptables -A OUTPUT -p tcp -d IP_ADDRESS_DB --dport 5432 -j ACCEPT
+iptables -A OUTPUT -p tcp -d IP_ADDRESS_WEB --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 443 -j DROP
+iptables -A OUTPUT -p tcp --dport 80 -j DROP
+iptables -A INPUT -p tcp -s CLIENT_IP --dport 80 -j ACCEPT
+```
+- There are some cases that we need to add rule at the beginning of the chain, we can use `-I` option to add the rule at the beginning of the chain.
+- `sudo iptables -I INPUT 1 -s 192.168.1.1 -j DROP`: to add a new rule at the beginning of the chain.
+- If we want to remove the rule, we can use `-D` option to remove the rule then, the index to pass count from 1 to the last rule as the image below:
+![Order of the rule](images/_index-18.png)
+- `sudo iptables -D INPUT 1`: to remove the rule at the beginning of the chain.
+
+## Cron Jobs
+- Cron Jobs is a system service that allow user to schedule the command to run at specific time.
+- The cron jobs is stored in `/etc/crontab` file.
+- To list all cron jobs: `crontab -l`
+- To schedule a job run command: `crontab -e`
+- It will show cron tab file in text editor.
+![Cron tab](images/_index-19.png) 
+- The cron tab in the image above follow structure: `minute hour day_of_month month day_of_week command`. It will schedule to run `uptime >> /tmp/system-report.txt` at 21h:00 every day.
+  - `minute`: start from 0 to 59.
+  - `hour`: start from 0 to 23.
+  - `day_of_month`: start from 1 to 31.
+  - `month`: start from 1 to 12.
+  - `day_of_week`: start from 0 to 7. Monday is 1, Sunday is 0.
+  - `command`: the command to run.
+- Do not run sudo before the command or it will schedule the command to run as root user.
+- The cron job will run as the user who schedule the job.
