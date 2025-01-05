@@ -447,5 +447,3 @@ curl -k  https://app.test/app2
 ```
 
 ![TLS Test](images/_index-17.png)
-
-P 181
